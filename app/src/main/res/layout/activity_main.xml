@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/background_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:importantForAccessibility="no"
@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextTime3"
-        app:srcCompat="@drawable/tabuleiro_opacidade80" />
+        app:srcCompat="@drawable/table_background" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -38,18 +38,18 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ems="10"
-        android:hint="00:00"
         android:inputType="time"
         android:rotation="90"
+        android:text="@string/lower_clock"
         android:textAlignment="center"
-        style="@style/clockTextColor"
         android:textSize="96sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
 
     <EditText
@@ -57,11 +57,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ems="10"
-        android:hint="00:00"
         android:inputType="time"
         android:rotation="90"
+        android:text="@string/upper_clock"
         android:textAlignment="center"
-        style="@style/clockTextColor"
         android:textSize="96sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,13 +74,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
+        android:contentDescription="configuration button"
         android:importantForAccessibility="yes"
         android:rotation="90"
         android:scaleX="3"
         android:scaleY="3"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/background_image"
+        app:layout_constraintStart_toStartOf="@+id/background_image"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:srcCompat="@drawable/configuration_button" />
 
