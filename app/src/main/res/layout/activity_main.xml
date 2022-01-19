@@ -24,14 +24,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="396dp" />
+        app:layout_constraintGuide_percent="0.45964432" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="335dp" />
+        app:layout_constraintGuide_percent="0.54309165" />
 
     <EditText
         android:id="@+id/editTextTime"
@@ -42,6 +42,7 @@
         android:inputType="time"
         android:rotation="90"
         android:textAlignment="center"
+        style="@style/clockTextColor"
         android:textSize="96sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintVertical_bias="0.0" />
+
 
     <EditText
         android:id="@+id/editTextTime3"
@@ -59,7 +61,7 @@
         android:inputType="time"
         android:rotation="90"
         android:textAlignment="center"
-        android:textColor="#000000"
+        style="@style/clockTextColor"
         android:textSize="96sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,5 +69,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/configurationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:importantForAccessibility="yes"
+        android:rotation="90"
+        android:scaleX="3"
+        android:scaleY="3"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:srcCompat="@drawable/configuration_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
