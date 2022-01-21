@@ -2,4 +2,9 @@
     <string name="app_name">Chess Clock</string>
     <string name="upper_clock">05:00</string>
     <string name="lower_clock">05:00</string>
+    <string name="set_your_time">Set your time</string>
+    <string name="newTimerTextOne">05:00</string>
+    <string name="newTimerTextTwo">05:00</string>
+    <string name="newTimerButtonOne">Button</string>
+    <string name="newTimerButtonTwo">Button</string>
 </resources>
