@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Relógio de Xadrez</string>
+    <string name="set_your_time">Defina seu tempo</string>
+    <string name="newTimerButtonOne">Botão</string>
+    <string name="newTimerButtonTwo">Botão</string>
+    <string name="configuration_button">Configuração</string>
+    <string name="toast_text">Configure seu relógio!</string>
 </resources>

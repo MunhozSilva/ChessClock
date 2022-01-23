@@ -13,9 +13,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val configButton = findViewById<ImageButton>(R.id.configurationButton)
+        val toastMessage: String = resources.getString(R.string.toast_text)
 
         configButton.setOnClickListener {
-            makeText(this, "Configure your clock!", Toast.LENGTH_SHORT).show()
+            makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
             val intent = Intent(this, ConfigurationActivity::class.java)
             startActivity(intent)
         }

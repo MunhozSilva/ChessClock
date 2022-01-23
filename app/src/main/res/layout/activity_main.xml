@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:importantForAccessibility="no"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTime3"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/table_background" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -33,56 +33,45 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.54309165" />
 
-    <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ems="10"
-        android:inputType="time"
-        android:rotation="90"
-        android:text="@string/lower_clock"
-        android:textAlignment="center"
-        android:textSize="96sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-
-    <EditText
-        android:id="@+id/editTextTime3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ems="10"
-        android:inputType="time"
-        android:rotation="90"
-        android:text="@string/upper_clock"
-        android:textAlignment="center"
-        android:textSize="96sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/configurationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
-        android:contentDescription="configuration button"
+        android:contentDescription="@string/configuration_button"
         android:importantForAccessibility="yes"
         android:rotation="90"
-        android:scaleX="3"
-        android:scaleY="3"
+        android:scaleX="2"
+        android:scaleY="2"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="@+id/background_image"
         app:layout_constraintStart_toStartOf="@+id/background_image"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:srcCompat="@drawable/configuration_button" />
+
+    <TextView
+        android:id="@+id/upper_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="90"
+        android:text="@string/upper_clock"
+        android:textSize="115sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/background_image" />
+
+    <TextView
+        android:id="@+id/lower_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="90"
+        android:text="@string/lower_clock"
+        android:textSize="115sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
