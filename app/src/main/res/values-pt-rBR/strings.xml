@@ -6,4 +6,5 @@
     <string name="newTimerButtonTwo">Botão</string>
     <string name="configuration_button">Configuração</string>
     <string name="toast_text">Configure seu relógio!</string>
+    <string name="upper_clock_button">relógio superior</string>
 </resources>
