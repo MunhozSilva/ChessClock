@@ -7,4 +7,5 @@
     <string name="configuration_button">Configuração</string>
     <string name="toast_text">Configure seu relógio!</string>
     <string name="upper_clock_button">relógio superior</string>
+    <string name="lower_clock_button">relógio inferior</string>
 </resources>

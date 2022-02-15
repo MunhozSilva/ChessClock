@@ -12,4 +12,5 @@
     <string name="plus_clocktwo">+</string>
     <string name="minus_clocktwo">-</string>
     <string name="upper_clock_button">upper clock</string>
+    <string name="lower_clock_button">lower clock</string>
 </resources>
