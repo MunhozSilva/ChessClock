@@ -11,4 +11,5 @@
     <string name="toast_text">Configure your clock!</string>
     <string name="plus_clocktwo">+</string>
     <string name="minus_clocktwo">-</string>
+    <string name="upper_clock_button">upper clock</string>
 </resources>
