@@ -52,7 +52,7 @@
         app:srcCompat="@drawable/configuration_button" />
 
     <TextView
-        android:id="@+id/upper_clock"
+        android:id="@+id/upper_clock_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rotation="90"
@@ -64,12 +64,27 @@
         app:layout_constraintTop_toTopOf="@+id/background_image" />
 
     <TextView
-        android:id="@+id/lower_clock"
+        android:id="@+id/lower_clock_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rotation="90"
         android:text="@string/lower_clock"
         android:textSize="115sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <Button
+        android:id="@+id/lower_clock_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="#1A6E6E6E"
+        android:contentDescription="@string/lower_clock_button"
+        android:elevation="5dp"
+        android:insetLeft="32dp"
+        android:insetRight="32dp"
+        android:rotation="90"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,26 +100,9 @@
         android:insetLeft="32dp"
         android:insetRight="32dp"
         android:rotation="90"
-        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/background_image" />
-
-    <Button
-        android:id="@+id/lower_clock_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:backgroundTint="#1A6E6E6E"
-        android:contentDescription="@string/lower_clock_button"
-        android:elevation="5dp"
-        android:insetLeft="32dp"
-        android:insetRight="32dp"
-        android:rotation="90"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
