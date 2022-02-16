@@ -12,18 +12,19 @@ import kotlin.math.roundToInt
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var timerStarted = false
+    private var upperTimerStarted = false
+    private var lowerTimerStarted = false
     private lateinit var upperClockServiceIntent: Intent
-    //private lateinit var lowerClockServiceIntent: Intent
+    private lateinit var lowerClockServiceIntent: Intent
     private var upperClockTime = 300.0
-    //private var lowerCLockTime = 300.0
+    private var lowerClockTime = 300.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //binding.upperClockButton.setOnClickListener { startLowerStopUpper() }
+        binding.upperClockButton.setOnClickListener { startLowerStopUpper() }
         binding.lowerClockButton.setOnClickListener { startUpperStopLower() }
 
         binding.configurationButton.setOnClickListener {
@@ -34,23 +35,25 @@ class MainActivity : AppCompatActivity() {
         upperClockServiceIntent = Intent(applicationContext, UpperClockService::class.java)
         registerReceiver(updateUpperClockTime, IntentFilter(UpperClockService.TIMER_UPDATED))
 
-        //ADD LOWER CLOCK SERVICE INTENT AND REGISTER IT'S RECEIVER
+        lowerClockServiceIntent = Intent(applicationContext, LowerClockService::class.java)
+        registerReceiver(updateLowerClockTime, IntentFilter(LowerClockService.LOWER_TIMER_UPDATED))
     }
 
+    // UPPER CLOCK FUNCTIONS
     private fun startUpperStopLower() {
-        pauseLowerClock()
         startUpperClock()
+        pauseLowerClock()
     }
 
     private fun pauseLowerClock() {
-        //stopService(upperClockServiceIntent)
-        //timerStarted = false
+        stopService(lowerClockServiceIntent)
+        lowerTimerStarted = false
     }
 
     private fun startUpperClock() {
         upperClockServiceIntent.putExtra(UpperClockService.TIME_EXTRA, upperClockTime)
         startService(upperClockServiceIntent)
-        timerStarted = true
+        upperTimerStarted = true
     }
 
     private val updateUpperClockTime: BroadcastReceiver = object : BroadcastReceiver() {
@@ -60,6 +63,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // LOWER CLOCK FUNCTIONS
+    private fun startLowerStopUpper() {
+        startLowerClock()
+        pauseUpperClock()
+    }
+
+    private fun pauseUpperClock() {
+        stopService(upperClockServiceIntent)
+        upperTimerStarted = false
+    }
+
+    private fun startLowerClock() {
+        lowerClockServiceIntent.putExtra(LowerClockService.LOWER_TIME_EXTRA, lowerClockTime)
+        startService(lowerClockServiceIntent)
+        lowerTimerStarted = true
+    }
+
+    private val updateLowerClockTime: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+            lowerClockTime = intent.getDoubleExtra(LowerClockService.LOWER_TIME_EXTRA, 300.0)
+            binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
+        }
+    }
+
+    // TIME FORMAT MANIPULATION
     private fun getTimeStringFromDouble(time: Double): String {
         val resultInt = time.roundToInt()
         val minutes = resultInt % 86400 % 3600 / 60
