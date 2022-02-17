@@ -58,8 +58,12 @@ class MainActivity : AppCompatActivity() {
 
     private val updateUpperClockTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
-            upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 300.0)
-            binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
+            if (upperClockTime != 0.0) {
+                upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 300.0)
+                binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
+            } else {
+                upperTimerStarted = false // create a function to deal when time hits 0
+            }
         }
     }
 
@@ -82,8 +86,12 @@ class MainActivity : AppCompatActivity() {
 
     private val updateLowerClockTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
-            lowerClockTime = intent.getDoubleExtra(LowerClockService.LOWER_TIME_EXTRA, 300.0)
-            binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
+            if(lowerClockTime != 0.0) {
+                lowerClockTime = intent.getDoubleExtra(LowerClockService.LOWER_TIME_EXTRA, 300.0)
+                binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
+            } else {
+                lowerTimerStarted = false // create a function to deal when time hits 0
+            }
         }
     }
 
