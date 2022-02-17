@@ -48,12 +48,14 @@ class MainActivity : AppCompatActivity() {
     private fun pauseLowerClock() {
         stopService(lowerClockServiceIntent)
         lowerTimerStarted = false
+        binding.lowerClockButton.setEnabled(false)
     }
 
     private fun startUpperClock() {
         upperClockServiceIntent.putExtra(UpperClockService.UPPER_TIME_EXTRA, upperClockTime)
         startService(upperClockServiceIntent)
         upperTimerStarted = true
+        binding.upperClockButton.setEnabled(true)
     }
 
     private val updateUpperClockTime: BroadcastReceiver = object : BroadcastReceiver() {
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 300.0)
                 binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
             } else {
-                upperTimerStarted = false // create a function to deal when time hits 0
+                upperTimerStarted = false // future improvement: create a function to deal when time hits 0
             }
         }
     }
@@ -76,12 +78,14 @@ class MainActivity : AppCompatActivity() {
     private fun pauseUpperClock() {
         stopService(upperClockServiceIntent)
         upperTimerStarted = false
+        binding.upperClockButton.setEnabled(false)
     }
 
     private fun startLowerClock() {
         lowerClockServiceIntent.putExtra(LowerClockService.LOWER_TIME_EXTRA, lowerClockTime)
         startService(lowerClockServiceIntent)
         lowerTimerStarted = true
+        binding.lowerClockButton.setEnabled(true)
     }
 
     private val updateLowerClockTime: BroadcastReceiver = object : BroadcastReceiver() {
@@ -90,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                 lowerClockTime = intent.getDoubleExtra(LowerClockService.LOWER_TIME_EXTRA, 300.0)
                 binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
             } else {
-                lowerTimerStarted = false // create a function to deal when time hits 0
+                lowerTimerStarted = false // future improvement: create a function to deal when time hits 0
             }
         }
     }
