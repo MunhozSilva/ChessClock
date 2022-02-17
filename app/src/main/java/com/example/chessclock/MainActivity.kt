@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         upperClockServiceIntent = Intent(applicationContext, UpperClockService::class.java)
-        registerReceiver(updateUpperClockTime, IntentFilter(UpperClockService.TIMER_UPDATED))
+        registerReceiver(updateUpperClockTime, IntentFilter(UpperClockService.UPPER_TIMER_UPDATED))
 
         lowerClockServiceIntent = Intent(applicationContext, LowerClockService::class.java)
         registerReceiver(updateLowerClockTime, IntentFilter(LowerClockService.LOWER_TIMER_UPDATED))
@@ -51,14 +51,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startUpperClock() {
-        upperClockServiceIntent.putExtra(UpperClockService.TIME_EXTRA, upperClockTime)
+        upperClockServiceIntent.putExtra(UpperClockService.UPPER_TIME_EXTRA, upperClockTime)
         startService(upperClockServiceIntent)
         upperTimerStarted = true
     }
 
     private val updateUpperClockTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
-            upperClockTime = intent.getDoubleExtra(UpperClockService.TIME_EXTRA, 300.0)
+            upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 300.0)
             binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
         }
     }
