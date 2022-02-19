@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.chessclock.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
 
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         stopService(lowerClockServiceIntent)
         lowerTimerStarted = false
         binding.lowerClockButton.setEnabled(false)
+        binding.lowerClockButton.visibility = View.INVISIBLE
     }
 
     private fun startUpperClock() {
@@ -56,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         startService(upperClockServiceIntent)
         upperTimerStarted = true
         binding.upperClockButton.setEnabled(true)
+        binding.upperClockButton.visibility = View.VISIBLE
     }
 
     private val updateUpperClockTime: BroadcastReceiver = object : BroadcastReceiver() {
@@ -79,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         stopService(upperClockServiceIntent)
         upperTimerStarted = false
         binding.upperClockButton.setEnabled(false)
+        binding.upperClockButton.visibility = View.INVISIBLE
     }
 
     private fun startLowerClock() {
@@ -86,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         startService(lowerClockServiceIntent)
         lowerTimerStarted = true
         binding.lowerClockButton.setEnabled(true)
+        binding.lowerClockButton.visibility = View.VISIBLE
     }
 
     private val updateLowerClockTime: BroadcastReceiver = object : BroadcastReceiver() {
