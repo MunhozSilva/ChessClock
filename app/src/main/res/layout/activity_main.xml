@@ -49,6 +49,7 @@
         app:layout_constraintEnd_toEndOf="@+id/background_image"
         app:layout_constraintStart_toStartOf="@+id/background_image"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.58000004"
         app:srcCompat="@drawable/configuration_button" />
 
     <TextView
@@ -82,8 +83,10 @@
         android:backgroundTint="#1A6E6E6E"
         android:contentDescription="@string/lower_clock_button"
         android:elevation="5dp"
-        android:insetLeft="32dp"
-        android:insetRight="32dp"
+        android:insetLeft="35dp"
+        android:insetTop="0dp"
+        android:insetRight="33dp"
+        android:insetBottom="0dp"
         android:rotation="90"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -99,7 +102,9 @@
         android:contentDescription="@string/upper_clock_button"
         android:elevation="5dp"
         android:insetLeft="32dp"
-        android:insetRight="32dp"
+        android:insetTop="0dp"
+        android:insetRight="28dp"
+        android:insetBottom="0dp"
         android:rotation="90"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
