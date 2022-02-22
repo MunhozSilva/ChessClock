@@ -76,12 +76,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
+    <ImageView
+        android:id="@+id/lower_clock_image_animation_one"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/square"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/background_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lower_clock_button" />
+
+    <ImageView
+        android:id="@+id/lower_clock_image_animation_two"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/square"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/background_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lower_clock_button" />
+
     <Button
         android:id="@+id/lower_clock_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="#1A6E6E6E"
-        android:contentDescription="@string/lower_clock_button"
         android:elevation="5dp"
         android:insetLeft="35dp"
         android:insetTop="0dp"
@@ -89,6 +112,7 @@
         android:insetBottom="0dp"
         android:rotation="90"
         android:visibility="visible"
+        android:contentDescription="@string/lower_clock_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
