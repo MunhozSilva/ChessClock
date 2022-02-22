@@ -18,10 +18,11 @@ class MainActivity : AppCompatActivity() {
     private var lowerTimerStarted = false
     private lateinit var upperClockServiceIntent: Intent
     private lateinit var lowerClockServiceIntent: Intent
-    private var upperClockTime = 300.0
+    private var upperClockTime = 35.0
     private var lowerClockTime = 35.0
     private var handlerAnimation = Handler()
-    private var lowerClockStatusAnimation = true
+    private var upperClockStatusAnimation = false
+    private var lowerClockStatusAnimation = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         binding.lowerClockButton.visibility = View.INVISIBLE
         binding.lowerClockImageAnimationOne.visibility = View.INVISIBLE
         binding.lowerClockImageAnimationTwo.visibility = View.INVISIBLE
+        lowerClockStatusAnimation = false
         handlerAnimation.removeCallbacks(runnable)
     }
 
@@ -70,7 +72,13 @@ class MainActivity : AppCompatActivity() {
     private val updateUpperClockTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             if (upperClockTime != 0.0) {
-                upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 300.0)
+                if(upperClockTime < 31.0) {
+                    upperClockStatusAnimation = true
+                    binding.upperClockImageAnimationOne.visibility = View.VISIBLE
+                    binding.upperClockImageAnimationTwo.visibility = View.VISIBLE
+                    startPulse()
+                }
+                upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 35.0)
                 binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
             } else {
                 upperTimerStarted = false // future improvement: create a function to deal when time hits 0
@@ -89,6 +97,10 @@ class MainActivity : AppCompatActivity() {
         upperTimerStarted = false
         binding.upperClockButton.setEnabled(false)
         binding.upperClockButton.visibility = View.INVISIBLE
+        binding.upperClockImageAnimationOne.visibility = View.INVISIBLE
+        binding.upperClockImageAnimationTwo.visibility = View.INVISIBLE
+        upperClockStatusAnimation = false
+        handlerAnimation.removeCallbacks(runnable)
     }
 
     private fun startLowerClock() {
@@ -103,6 +115,7 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent) {
             if(lowerClockTime != 0.0) {
                 if(lowerClockTime < 31.0) {
+                    lowerClockStatusAnimation = true
                     binding.lowerClockImageAnimationOne.visibility = View.VISIBLE
                     binding.lowerClockImageAnimationTwo.visibility = View.VISIBLE
                     startPulse()
@@ -123,6 +136,26 @@ class MainActivity : AppCompatActivity() {
     private var runnable = object : Runnable {
         override fun run() {
 
+            if (upperClockStatusAnimation) {
+                binding.upperClockImageAnimationOne.animate().scaleX(70f).scaleY(70f).alpha(0f)
+                    .setDuration(900)
+                    .withEndAction {
+                        binding.upperClockImageAnimationOne.scaleX = 1f
+                        binding.upperClockImageAnimationOne.scaleY = 1f
+                        binding.upperClockImageAnimationOne.alpha = 1f
+                    }
+
+                binding.upperClockImageAnimationTwo.animate().scaleX(70f).scaleY(70f).alpha(0f)
+                    .setDuration(700)
+                    .withEndAction {
+                        binding.upperClockImageAnimationTwo.scaleX = 1f
+                        binding.upperClockImageAnimationTwo.scaleY = 1f
+                        binding.upperClockImageAnimationTwo.alpha = 1f
+                    }
+
+                handlerAnimation.postDelayed(this, 1000)
+            }
+
             if (lowerClockStatusAnimation) {
                 binding.lowerClockImageAnimationOne.animate().scaleX(70f).scaleY(70f).alpha(0f)
                     .setDuration(900)
@@ -141,7 +174,6 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 handlerAnimation.postDelayed(this, 1000)
-
             }
         }
     }
