@@ -33,8 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding.lowerClockButton.setOnClickListener { startUpperStopLower() }
 
         binding.configurationButton.setOnClickListener {
-            val intent = Intent(this, ConfigurationActivity::class.java)
-            startActivity(intent)
+
         }
 
         upperClockServiceIntent = Intent(applicationContext, UpperClockService::class.java)
