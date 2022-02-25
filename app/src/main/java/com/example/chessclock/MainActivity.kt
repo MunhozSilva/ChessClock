@@ -32,15 +32,17 @@ class MainActivity : AppCompatActivity() {
         binding.upperClockButton.setOnClickListener { startLowerStopUpper() }
         binding.lowerClockButton.setOnClickListener { startUpperStopLower() }
 
-        binding.configurationButton.setOnClickListener {
-
-        }
+        binding.resetButton.setOnClickListener { resetClocks() }
 
         upperClockServiceIntent = Intent(applicationContext, UpperClockService::class.java)
         registerReceiver(updateUpperClockTime, IntentFilter(UpperClockService.UPPER_TIMER_UPDATED))
 
         lowerClockServiceIntent = Intent(applicationContext, LowerClockService::class.java)
         registerReceiver(updateLowerClockTime, IntentFilter(LowerClockService.LOWER_TIMER_UPDATED))
+    }
+
+    private fun resetClocks() {
+        TODO("Not yet implemented")
     }
 
     // UPPER CLOCK FUNCTIONS
