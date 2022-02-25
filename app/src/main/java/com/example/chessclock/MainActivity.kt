@@ -41,8 +41,20 @@ class MainActivity : AppCompatActivity() {
         registerReceiver(updateLowerClockTime, IntentFilter(LowerClockService.LOWER_TIMER_UPDATED))
     }
 
+    // RESET CLOCKS FUNCTIONS
     private fun resetClocks() {
-        TODO("Not yet implemented")
+        stopClocks()
+        upperClockTime = 300.0
+        lowerClockTime = 300.0
+        binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
+        binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
+    }
+
+    private fun stopClocks() {
+        stopService(upperClockServiceIntent)
+        stopService(lowerClockServiceIntent)
+        upperTimerStarted = false
+        lowerTimerStarted = false
     }
 
     // UPPER CLOCK FUNCTIONS
