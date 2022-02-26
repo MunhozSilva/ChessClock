@@ -43,18 +43,15 @@ class MainActivity : AppCompatActivity() {
 
     // RESET CLOCKS FUNCTIONS
     private fun resetClocks() {
-        stopClocks()
-        upperClockTime = 300.0
-        lowerClockTime = 300.0
+        endGameState()
+        upperClockTime = 35.0
+        lowerClockTime = 35.0
         binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
         binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
-    }
-
-    private fun stopClocks() {
-        stopService(upperClockServiceIntent)
-        stopService(lowerClockServiceIntent)
-        upperTimerStarted = false
-        lowerTimerStarted = false
+        binding.upperClockButton.visibility = View.VISIBLE
+        binding.lowerClockButton.visibility = View.VISIBLE
+        binding.upperClockButton.setEnabled(true)
+        binding.lowerClockButton.setEnabled(true)
     }
 
     // UPPER CLOCK FUNCTIONS
@@ -94,7 +91,8 @@ class MainActivity : AppCompatActivity() {
                 upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 35.0)
                 binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
             } else {
-                upperTimerStarted = false // future improvement: create a function to deal when time hits 0
+                //upperTimerStarted = false // future improvement: create a function to deal when time hits 0
+                endGameState()
             }
         }
     }
@@ -136,9 +134,16 @@ class MainActivity : AppCompatActivity() {
                 lowerClockTime = intent.getDoubleExtra(LowerClockService.LOWER_TIME_EXTRA, 35.0)
                 binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
             } else {
-                lowerTimerStarted = false // future improvement: create a function to deal when time hits 0
+                //lowerTimerStarted = false // future improvement: create a function to deal when time hits 0
+                endGameState()
             }
         }
+    }
+
+    // END GAME STATE
+    private fun endGameState() {
+        pauseUpperClock()
+        pauseLowerClock()
     }
 
     // LOW TIME WARNING ANIMATION
