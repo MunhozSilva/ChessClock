@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
         binding.upperClockButton.visibility = View.VISIBLE
         binding.lowerClockButton.visibility = View.VISIBLE
-        binding.upperClockButton.setEnabled(true)
-        binding.lowerClockButton.setEnabled(true)
+        binding.upperClockButton.isEnabled = true
+        binding.lowerClockButton.isEnabled = true
     }
 
     // UPPER CLOCK FUNCTIONS
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     private fun pauseLowerClock() {
         stopService(lowerClockServiceIntent)
         lowerTimerStarted = false
-        binding.lowerClockButton.setEnabled(false)
+        binding.lowerClockButton.isEnabled = false
         binding.lowerClockButton.visibility = View.INVISIBLE
         binding.lowerClockImageAnimationOne.visibility = View.INVISIBLE
         binding.lowerClockImageAnimationTwo.visibility = View.INVISIBLE
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         upperClockServiceIntent.putExtra(UpperClockService.UPPER_TIME_EXTRA, upperClockTime)
         startService(upperClockServiceIntent)
         upperTimerStarted = true
-        binding.upperClockButton.setEnabled(true)
+        binding.upperClockButton.isEnabled = true
         binding.upperClockButton.visibility = View.VISIBLE
     }
 
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
     private fun pauseUpperClock() {
         stopService(upperClockServiceIntent)
         upperTimerStarted = false
-        binding.upperClockButton.setEnabled(false)
+        binding.upperClockButton.isEnabled = false
         binding.upperClockButton.visibility = View.INVISIBLE
         binding.upperClockImageAnimationOne.visibility = View.INVISIBLE
         binding.upperClockImageAnimationTwo.visibility = View.INVISIBLE
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         lowerClockServiceIntent.putExtra(LowerClockService.LOWER_TIME_EXTRA, lowerClockTime)
         startService(lowerClockServiceIntent)
         lowerTimerStarted = true
-        binding.lowerClockButton.setEnabled(true)
+        binding.lowerClockButton.isEnabled = true
         binding.lowerClockButton.visibility = View.VISIBLE
     }
 
