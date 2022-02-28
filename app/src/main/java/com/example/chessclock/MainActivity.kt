@@ -1,13 +1,11 @@
 package com.example.chessclock
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.example.chessclock.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
 
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding.upperClockButton.setOnClickListener { startLowerStopUpper() }
         binding.lowerClockButton.setOnClickListener { startUpperStopLower() }
 
-        binding.resetButton.setOnClickListener { resetClocks() }
+        binding.resetButton.setOnClickListener { resetDialog() }
 
         upperClockServiceIntent = Intent(applicationContext, UpperClockService::class.java)
         registerReceiver(updateUpperClockTime, IntentFilter(UpperClockService.UPPER_TIMER_UPDATED))
@@ -144,6 +142,19 @@ class MainActivity : AppCompatActivity() {
     private fun endGameState() {
         pauseUpperClock()
         pauseLowerClock()
+    }
+
+    // RESET DIALOG
+    private fun resetDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.apply {
+            setMessage(R.string.reset_dialog_message)
+            setPositiveButton(android.R.string.ok) { _, _ -> resetClocks() }
+            setNegativeButton(android.R.string.cancel) { _, _ -> /* Dismiss dialog */ }
+            setCancelable(true)
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     // LOW TIME WARNING ANIMATION
