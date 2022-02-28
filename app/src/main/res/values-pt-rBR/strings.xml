@@ -4,4 +4,5 @@
     <string name="reset_button">Resete</string>
     <string name="upper_clock_button">relógio superior</string>
     <string name="lower_clock_button">relógio inferior</string>
+    <string name="reset_dialog_message">Tem certeza?</string>
 </resources>
