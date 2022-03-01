@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".UpperClockService"/>
-        <service android:name=".LowerClockService"/>
+        <service android:name=".service.UpperClockService"/>
+        <service android:name=".service.LowerClockService"/>
     </application>
 
 </manifest>
