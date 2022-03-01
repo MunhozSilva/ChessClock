@@ -1,4 +1,4 @@
-package com.example.chessclock
+package com.example.chessclock.service
 
 import android.app.Service
 import android.content.Intent

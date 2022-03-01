@@ -7,6 +7,8 @@ import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.example.chessclock.databinding.ActivityMainBinding
+import com.example.chessclock.service.LowerClockService
+import com.example.chessclock.service.UpperClockService
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
