@@ -8,4 +8,5 @@
     <string name="upper_clock_button">upper clock</string>
     <string name="lower_clock_button">lower clock</string>
     <string name="reset_dialog_message">Are you sure?</string>
+    <string name="clock_configuration">clock configuration</string>
 </resources>

@@ -106,24 +106,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/lower_clock_button" />
 
-    <ImageButton
-        android:id="@+id/reset_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/reset_button"
-        android:elevation="3dp"
-        android:importantForAccessibility="yes"
-        android:rotation="90"
-        android:scaleX="2"
-        android:scaleY="2"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/background_image"
-        app:layout_constraintStart_toStartOf="@+id/background_image"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.58000004"
-        app:srcCompat="@drawable/ic_baseline_replay_24" />
-
     <Button
         android:id="@+id/upper_clock_button"
         android:layout_width="0dp"
@@ -159,5 +141,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <ImageButton
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/reset_button"
+        android:elevation="3dp"
+        android:importantForAccessibility="yes"
+        android:rotation="90"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="@+id/background_image"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toStartOf="@+id/background_image"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.58000004"
+        app:srcCompat="@drawable/ic_baseline_replay_24" />
+
+    <ImageButton
+        android:id="@+id/configuration_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/clock_configuration"
+        android:elevation="3dp"
+        android:rotation="90"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="@+id/background_image"
+        app:layout_constraintStart_toStartOf="@+id/background_image"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.58000004"
+        app:srcCompat="@drawable/configuration_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
