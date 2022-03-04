@@ -9,4 +9,5 @@
     <color name="whitey">#FFFFEDC9</color>
     <color name="greyish">#FFAA8A75</color>
     <color name="warning">#4DF84A4A</color>
+    <color name="buttons_color">#A64438</color>
 </resources>
