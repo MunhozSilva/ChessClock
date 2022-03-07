@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private var handlerAnimation = Handler()
     private var upperClockStatusAnimation = false
     private var lowerClockStatusAnimation = false
+    private var timeConfigurationOptions = arrayOf("1 min", "1 min +1s", "3 min", "3 min +2s", "10 min", "10 min +10s")
+    private var gameModeSelector = "blitzGameMode"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,27 +33,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.upperClockButton.setOnClickListener { startLowerStopUpper() }
         binding.lowerClockButton.setOnClickListener { startUpperStopLower() }
-
         binding.resetButton.setOnClickListener { resetDialog() }
+        binding.configurationButton.setOnClickListener { configurationDialog() }
 
         upperClockServiceIntent = Intent(applicationContext, UpperClockService::class.java)
         registerReceiver(updateUpperClockTime, IntentFilter(UpperClockService.UPPER_TIMER_UPDATED))
 
         lowerClockServiceIntent = Intent(applicationContext, LowerClockService::class.java)
         registerReceiver(updateLowerClockTime, IntentFilter(LowerClockService.LOWER_TIMER_UPDATED))
-    }
-
-    // RESET CLOCKS FUNCTIONS
-    private fun resetClocks() {
-        endGameState()
-        upperClockTime = 35.0
-        lowerClockTime = 35.0
-        binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
-        binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
-        binding.upperClockButton.visibility = View.VISIBLE
-        binding.lowerClockButton.visibility = View.VISIBLE
-        binding.upperClockButton.isEnabled = true
-        binding.lowerClockButton.isEnabled = true
     }
 
     // UPPER CLOCK FUNCTIONS
@@ -140,10 +129,53 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // RESET CLOCKS FUNCTION
+    private fun resetClocks() {
+        endGameState()
+        gameMode()
+        binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
+        binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
+        binding.upperClockButton.visibility = View.VISIBLE
+        binding.lowerClockButton.visibility = View.VISIBLE
+        binding.upperClockButton.isEnabled = true
+        binding.lowerClockButton.isEnabled = true
+    }
+
     // END GAME STATE
     private fun endGameState() {
         pauseUpperClock()
         pauseLowerClock()
+    }
+
+    // GAME MODE FUNCTIONS
+    private fun gameMode() {
+        if (gameModeSelector == "bulletGameMode") {
+            upperClockTime = 60.0
+            lowerClockTime = 60.0
+        }
+        if (gameModeSelector == "bulletWithIncrementGameMode") {
+            upperClockTime = 60.0
+            lowerClockTime = 60.0
+            //increment()
+        }
+        if (gameModeSelector == "blitzGameMode") {
+            upperClockTime = 180.0
+            lowerClockTime = 180.0
+        }
+        if (gameModeSelector == "blitzWithIncrementGameMode") {
+            upperClockTime = 180.0
+            lowerClockTime = 180.0
+            //increment()
+        }
+        if (gameModeSelector == "rapidGameMode") {
+            upperClockTime = 600.0
+            lowerClockTime = 600.0
+        }
+        if (gameModeSelector == "rapidWithIncrementGameMode") {
+            upperClockTime = 600.0
+            lowerClockTime = 600.0
+            //increment()
+        }
     }
 
     // RESET DIALOG
@@ -152,6 +184,30 @@ class MainActivity : AppCompatActivity() {
         builder.apply {
             setMessage(R.string.reset_dialog_message)
             setPositiveButton(android.R.string.ok) { _, _ -> resetClocks() }
+            setNegativeButton(android.R.string.cancel) { _, _ -> /* Dismiss dialog */ }
+            setCancelable(true)
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    // CONFIGURATION DIALOG
+    private fun configurationDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.apply {
+            setTitle("Time")
+            setSingleChoiceItems(timeConfigurationOptions, -1){ dialog, which ->
+                when(which) {
+                    0 -> gameModeSelector = "bulletGameMode"
+                    1 -> gameModeSelector = "bulletWithIncrementGameMode"
+                    2 -> gameModeSelector = "blitzGameMode"
+                    3 -> gameModeSelector = "blitzWithIncrementGameMode"
+                    4 -> gameModeSelector = "rapidGameMode"
+                    5 -> gameModeSelector = "rapidWithIncrementGameMode"
+                }
+                resetClocks()
+                dialog.dismiss()
+            }
             setNegativeButton(android.R.string.cancel) { _, _ -> /* Dismiss dialog */ }
             setCancelable(true)
         }
