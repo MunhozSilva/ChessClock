@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     private var lowerTimerStarted = false
     private lateinit var upperClockServiceIntent: Intent
     private lateinit var lowerClockServiceIntent: Intent
-    private var upperClockTime = 35.0
-    private var lowerClockTime = 35.0
+    private var upperClockTime = 180.0
+    private var lowerClockTime = 180.0
     private var handlerAnimation = Handler()
     private var upperClockStatusAnimation = false
     private var lowerClockStatusAnimation = false
@@ -71,16 +71,15 @@ class MainActivity : AppCompatActivity() {
     private val updateUpperClockTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             if (upperClockTime != 0.0) {
-                if(upperClockTime < 31.0) {
+                if(upperClockTime < 46.0) {
                     upperClockStatusAnimation = true
                     binding.upperClockImageAnimationOne.visibility = View.VISIBLE
                     binding.upperClockImageAnimationTwo.visibility = View.VISIBLE
                     startPulse()
                 }
-                upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 35.0)
+                upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 180.0)
                 binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
             } else {
-                //upperTimerStarted = false // future improvement: create a function to deal when time hits 0
                 endGameState()
             }
         }
@@ -114,16 +113,15 @@ class MainActivity : AppCompatActivity() {
     private val updateLowerClockTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             if(lowerClockTime != 0.0) {
-                if(lowerClockTime < 31.0) {
+                if(lowerClockTime < 46.0) {
                     lowerClockStatusAnimation = true
                     binding.lowerClockImageAnimationOne.visibility = View.VISIBLE
                     binding.lowerClockImageAnimationTwo.visibility = View.VISIBLE
                     startPulse()
                 }
-                lowerClockTime = intent.getDoubleExtra(LowerClockService.LOWER_TIME_EXTRA, 35.0)
+                lowerClockTime = intent.getDoubleExtra(LowerClockService.LOWER_TIME_EXTRA, 180.0)
                 binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
             } else {
-                //lowerTimerStarted = false // future improvement: create a function to deal when time hits 0
                 endGameState()
             }
         }
