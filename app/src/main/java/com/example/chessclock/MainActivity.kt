@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity() {
     private fun configurationDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.apply {
-            setTitle("Time")
+            setTitle(R.string.configuration_dialog_title)
             setSingleChoiceItems(timeConfigurationOptions, -1){ dialog, which ->
                 when(which) {
                     0 -> gameModeSelector = "bulletGameMode"
