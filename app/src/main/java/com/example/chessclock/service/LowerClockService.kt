@@ -11,7 +11,7 @@ class LowerClockService : Service() {
     private val timer = Timer()
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        val time = intent.getDoubleExtra(LOWER_TIME_EXTRA, 35.0)
+        val time = intent.getDoubleExtra(LOWER_TIME_EXTRA, 180.0)
         timer.scheduleAtFixedRate(TimeTask(time), 0, 1000)
         return START_NOT_STICKY
     }
