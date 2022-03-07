@@ -7,4 +7,5 @@
     <string name="lower_clock_button">lower clock</string>
     <string name="reset_dialog_message">Are you sure?</string>
     <string name="clock_configuration">clock configuration</string>
+    <string name="configuration_dialog_title">Time</string>
 </resources>
