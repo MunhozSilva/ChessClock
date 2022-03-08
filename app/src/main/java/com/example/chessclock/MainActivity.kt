@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
     private var handlerAnimation = Handler()
     private var upperClockStatusAnimation = false
     private var lowerClockStatusAnimation = false
-    private var timeConfigurationOptions = arrayOf("1 min", "1 min +1s", "3 min", "3 min +2s", "10 min", "10 min +10s")
-    private var gameModeSelector = "blitzGameMode"
+    private var timeConfigurationOptions = arrayOf("1 min", "1 min +1s", "3 min", "3 min +2s", "5 min", "5 min +5s", "10 min", "30 min")
+    private var gameModeSelector = "blitzThreeMinGameMode"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,23 +156,31 @@ class MainActivity : AppCompatActivity() {
             lowerClockTime = 60.0
             //increment()
         }
-        if (gameModeSelector == "blitzGameMode") {
+        if (gameModeSelector == "blitzThreeMinGameMode") {
             upperClockTime = 180.0
             lowerClockTime = 180.0
         }
-        if (gameModeSelector == "blitzWithIncrementGameMode") {
+        if (gameModeSelector == "blitzThreeMinWithIncrementGameMode") {
             upperClockTime = 180.0
             lowerClockTime = 180.0
             //increment()
         }
-        if (gameModeSelector == "rapidGameMode") {
+        if (gameModeSelector == "blitzFiveMinGameMode") {
+            upperClockTime = 300.0
+            lowerClockTime = 300.0
+        }
+        if (gameModeSelector == "blitzFiveMinWithIncrementGameMode") {
+            upperClockTime = 300.0
+            lowerClockTime = 300.0
+            //increment()
+        }
+        if (gameModeSelector == "rapidTenMinGameMode") {
             upperClockTime = 600.0
             lowerClockTime = 600.0
         }
-        if (gameModeSelector == "rapidWithIncrementGameMode") {
-            upperClockTime = 600.0
-            lowerClockTime = 600.0
-            //increment()
+        if (gameModeSelector == "rapidThirtyMinGameMode") {
+            upperClockTime = 1800.0
+            lowerClockTime = 1800.0
         }
     }
 
@@ -198,10 +206,12 @@ class MainActivity : AppCompatActivity() {
                 when(which) {
                     0 -> gameModeSelector = "bulletGameMode"
                     1 -> gameModeSelector = "bulletWithIncrementGameMode"
-                    2 -> gameModeSelector = "blitzGameMode"
-                    3 -> gameModeSelector = "blitzWithIncrementGameMode"
-                    4 -> gameModeSelector = "rapidGameMode"
-                    5 -> gameModeSelector = "rapidWithIncrementGameMode"
+                    2 -> gameModeSelector = "blitzThreeMinGameMode"
+                    3 -> gameModeSelector = "blitzThreeMinWithIncrementGameMode"
+                    4 -> gameModeSelector = "blitzFiveMinGameMode"
+                    5 -> gameModeSelector = "blitzFiveMinWithIncrementGameMode"
+                    6 -> gameModeSelector = "rapidTenMinGameMode"
+                    7 -> gameModeSelector = "rapidThirtyMinGameMode"
                 }
                 resetClocks()
                 dialog.dismiss()
