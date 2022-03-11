@@ -47,11 +47,14 @@ class MainActivity : AppCompatActivity() {
 
     // UPPER CLOCK FUNCTIONS
     private fun startUpperStopLower() {
-        startUpperClock()
+
+        // First pause the running clock to make sure the increment is added if needed
         pauseLowerClock()
+        startUpperClock()
     }
 
     private fun pauseLowerClock() {
+        incrementLowerClock()
         stopService(lowerClockServiceIntent)
         binding.lowerClockButton.isEnabled = false
         binding.lowerClockButton.visibility = View.INVISIBLE
@@ -96,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     // LOWER CLOCK FUNCTIONS
     private fun startLowerStopUpper() {
 
-        // First pause the clock to make sure the increment is added if needed
+        // First pause the running clock to make sure the increment is added if needed
         pauseUpperClock()
         startLowerClock()
     }
@@ -308,6 +311,21 @@ class MainActivity : AppCompatActivity() {
 
             // Update the UI
             binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
+        }
+    }
+
+    private fun incrementLowerClock() {
+
+        // Check if there is an increment to be done and if it's not the first movement of the game
+        if (incrementValue != 0.0 && !binding.upperClockButton.isEnabled) {
+            when(incrementValue) {
+                1.0 -> lowerClockTime += 1.0
+                2.0 -> lowerClockTime += 2.0
+                5.0 -> lowerClockTime += 5.0
+            }
+
+            // Update the UI
+            binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
         }
     }
 
