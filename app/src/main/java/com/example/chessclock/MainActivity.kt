@@ -14,8 +14,6 @@ import kotlin.math.roundToInt
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    //private var upperTimerStarted = false
-    //private var lowerTimerStarted = false
     private lateinit var upperClockServiceIntent: Intent
     private lateinit var lowerClockServiceIntent: Intent
     private var upperClockTime = 180.0
@@ -55,7 +53,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun pauseLowerClock() {
         stopService(lowerClockServiceIntent)
-        //lowerTimerStarted = false
         binding.lowerClockButton.isEnabled = false
         binding.lowerClockButton.visibility = View.INVISIBLE
 
@@ -69,7 +66,6 @@ class MainActivity : AppCompatActivity() {
     private fun startUpperClock() {
         upperClockServiceIntent.putExtra(UpperClockService.UPPER_TIME_EXTRA, upperClockTime)
         startService(upperClockServiceIntent)
-        //upperTimerStarted = true
         binding.upperClockButton.isEnabled = true
         binding.upperClockButton.visibility = View.VISIBLE
     }
@@ -108,7 +104,6 @@ class MainActivity : AppCompatActivity() {
     private fun pauseUpperClock() {
         incrementUpperClock()
         stopService(upperClockServiceIntent)
-        //upperTimerStarted = false
         binding.upperClockButton.isEnabled = false
         binding.upperClockButton.visibility = View.INVISIBLE
 
@@ -122,7 +117,6 @@ class MainActivity : AppCompatActivity() {
     private fun startLowerClock() {
         lowerClockServiceIntent.putExtra(LowerClockService.LOWER_TIME_EXTRA, lowerClockTime)
         startService(lowerClockServiceIntent)
-        //lowerTimerStarted = true
         binding.lowerClockButton.isEnabled = true
         binding.lowerClockButton.visibility = View.VISIBLE
     }
