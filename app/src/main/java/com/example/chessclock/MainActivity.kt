@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Buttons
-        binding.upperClockButton.setOnClickListener { startLowerStopUpper() }
-        binding.lowerClockButton.setOnClickListener { startUpperStopLower() }
+        binding.upperClockButton.setOnClickListener { startLowerPauseUpper() }
+        binding.lowerClockButton.setOnClickListener { startUpperPauseLower() }
         binding.resetButton.setOnClickListener { resetDialog() }
         binding.configurationButton.setOnClickListener { configurationDialog() }
 
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // UPPER CLOCK FUNCTIONS
-    private fun startUpperStopLower() {
+    private fun startUpperPauseLower() {
 
         // First pause the running clock to make sure the increment is added if needed
         pauseLowerClock()
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // LOWER CLOCK FUNCTIONS
-    private fun startLowerStopUpper() {
+    private fun startLowerPauseUpper() {
 
         // First pause the running clock to make sure the increment is added if needed
         pauseUpperClock()
