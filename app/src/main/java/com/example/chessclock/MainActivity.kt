@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var timeConfigurationOptions = arrayOf("1 min", "1 min +1s", "3 min", "3 min +2s", "5 min", "5 min +5s", "10 min", "30 min")
     private var gameModeSelector = "blitzThreeMinGameMode"
     private var incrementValue = 0.0
+    private var endgameFlag = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +55,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pauseLowerClock() {
-        incrementLowerClock()
+
+        // Prevent increment when game is over
+        if (!endgameFlag) {
+            incrementLowerClock()
+        }
+
+        // Core commands to pause the clock
         stopService(lowerClockServiceIntent)
         binding.lowerClockButton.isEnabled = false
         binding.lowerClockButton.visibility = View.INVISIBLE
 
-        // Animation
+        // Pause animation
         binding.lowerClockImageAnimationOne.visibility = View.INVISIBLE
         binding.lowerClockImageAnimationTwo.visibility = View.INVISIBLE
         lowerClockStatusAnimation = false
@@ -105,12 +112,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pauseUpperClock() {
-        incrementUpperClock()
+
+        // Prevent increment when game is over
+        if (!endgameFlag) {
+            incrementUpperClock()
+        }
+
+        // Core commands to pause the clock
         stopService(upperClockServiceIntent)
         binding.upperClockButton.isEnabled = false
         binding.upperClockButton.visibility = View.INVISIBLE
 
-        // Animation
+        // Pause animation
         binding.upperClockImageAnimationOne.visibility = View.INVISIBLE
         binding.upperClockImageAnimationTwo.visibility = View.INVISIBLE
         upperClockStatusAnimation = false
@@ -151,6 +164,7 @@ class MainActivity : AppCompatActivity() {
     private fun resetClocks() {
         endGameState()
         gameMode()
+        endgameFlag = false
         binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
         binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
         binding.upperClockButton.visibility = View.VISIBLE
@@ -161,6 +175,7 @@ class MainActivity : AppCompatActivity() {
 
     // END GAME STATE
     private fun endGameState() {
+        endgameFlag = true
         pauseUpperClock()
         pauseLowerClock()
     }
