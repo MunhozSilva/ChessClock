@@ -12,7 +12,7 @@ class LowerClockService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         val time = intent.getDoubleExtra(LOWER_TIME_EXTRA, 180.0)
-        timer.scheduleAtFixedRate(TimeTask(time), 0, 1000)
+        timer.scheduleAtFixedRate(TimeTask(time), 0, 100)
         return START_NOT_STICKY
     }
 
@@ -24,7 +24,7 @@ class LowerClockService : Service() {
     private inner class TimeTask(private var time: Double) : TimerTask() {
         override fun run() {
             val intent = Intent(LOWER_TIMER_UPDATED)
-            time--
+                time -= 0.1
             intent.putExtra(LOWER_TIME_EXTRA, time)
             sendBroadcast(intent)
         }
