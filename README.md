@@ -15,4 +15,4 @@ ChessClock is an application created to practice my personal studies, which I ap
 
 ## Interface
 
-![UI](https://user-images.githubusercontent.com/60015944/159357651-99997fb0-c7f1-4df1-b64c-2fdf604d9d8d.JPG)
+![User Interface](https://user-images.githubusercontent.com/60015944/159357890-85dc8d84-b888-4e32-98f8-fc2710305559.JPG)
