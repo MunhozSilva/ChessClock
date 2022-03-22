@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private var handlerAnimation = Handler()
     private var upperClockStatusAnimation = false
     private var lowerClockStatusAnimation = false
+    private var upperFlag = false
+    private var lowerFlag = false
     private var timeConfigurationOptions = arrayOf("1 min", "1 min +1s", "3 min", "3 min +2s", "5 min", "5 min +5s", "10 min", "30 min")
     private var gameModeSelector = "blitzThreeMinGameMode"
     private var incrementValue = 0.0
@@ -76,6 +78,9 @@ class MainActivity : AppCompatActivity() {
     private fun startUpperClock() {
         upperClockServiceIntent.putExtra(UpperClockService.UPPER_TIME_EXTRA, upperClockTime)
         startService(upperClockServiceIntent)
+        if (upperFlag){
+            startUpperAnimation()
+        }
         binding.upperClockButton.isEnabled = true
         binding.upperClockButton.visibility = View.VISIBLE
     }
@@ -84,14 +89,11 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent) {
 
             // Check if game is not over
-            if (upperClockTime != 0.0) {
+            if (upperClockTime > 0.0) {
 
-                // Animation effect when time is low
+                // Allows upper clock animation begin
                 if(upperClockTime < 46.0) {
-                    upperClockStatusAnimation = true
-                    binding.upperClockImageAnimationOne.visibility = View.VISIBLE
-                    binding.upperClockImageAnimationTwo.visibility = View.VISIBLE
-                    startPulse()
+                    upperFlag = true
                 }
 
                 // Update clock time
@@ -133,6 +135,9 @@ class MainActivity : AppCompatActivity() {
     private fun startLowerClock() {
         lowerClockServiceIntent.putExtra(LowerClockService.LOWER_TIME_EXTRA, lowerClockTime)
         startService(lowerClockServiceIntent)
+        if (lowerFlag) {
+            startLowerAnimation()
+        }
         binding.lowerClockButton.isEnabled = true
         binding.lowerClockButton.visibility = View.VISIBLE
     }
@@ -141,14 +146,11 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent) {
 
             // Check if game is not over
-            if(lowerClockTime != 0.0) {
+            if(lowerClockTime > 0.0) {
 
-                // Animation effect when time is low
+                // Allows lower clock animation begin
                 if(lowerClockTime < 46.0) {
-                    lowerClockStatusAnimation = true
-                    binding.lowerClockImageAnimationOne.visibility = View.VISIBLE
-                    binding.lowerClockImageAnimationTwo.visibility = View.VISIBLE
-                    startPulse()
+                    lowerFlag = true
                 }
 
                 // Update clock time
@@ -176,6 +178,8 @@ class MainActivity : AppCompatActivity() {
     // END GAME STATE
     private fun endGameState() {
         endgameFlag = true
+        upperFlag = false
+        lowerFlag = false
         pauseUpperClock()
         pauseLowerClock()
     }
@@ -264,6 +268,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     // LOW TIME WARNING ANIMATION FUNCTIONS
+    private fun startUpperAnimation() {
+        upperClockStatusAnimation = true
+        binding.upperClockImageAnimationOne.visibility = View.VISIBLE
+        binding.upperClockImageAnimationTwo.visibility = View.VISIBLE
+        startPulse()
+    }
+
+    private fun startLowerAnimation() {
+        lowerClockStatusAnimation = true
+        binding.lowerClockImageAnimationOne.visibility = View.VISIBLE
+        binding.lowerClockImageAnimationTwo.visibility = View.VISIBLE
+        startPulse()
+    }
+
     private fun startPulse() {
             runnable.run()
     }
