@@ -33,14 +33,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Buttons
+        /**
+         * Buttons
+         */
         binding.upperClockButton.setOnClickListener { startLowerPauseUpper() }
         binding.lowerClockButton.setOnClickListener { startUpperPauseLower() }
         binding.resetButton.setOnClickListener { resetDialog() }
         binding.configurationButton.setOnClickListener { configurationDialog() }
 
-
-        // Services intent
+        /**
+         * Services intent
+         */
         upperClockServiceIntent = Intent(applicationContext, UpperClockService::class.java)
         registerReceiver(updateUpperClockTime, IntentFilter(UpperClockService.UPPER_TIMER_UPDATED))
 
@@ -48,27 +51,37 @@ class MainActivity : AppCompatActivity() {
         registerReceiver(updateLowerClockTime, IntentFilter(LowerClockService.LOWER_TIMER_UPDATED))
     }
 
-    // UPPER CLOCK FUNCTIONS
+    /**
+     * UPPER CLOCK FUNCTIONS
+     */
     private fun startUpperPauseLower() {
 
-        // First pause the running clock to make sure the increment is added if needed
+        /**
+         * First pause the running clock to make sure the increment is added if needed
+         */
         pauseLowerClock()
         startUpperClock()
     }
 
     private fun pauseLowerClock() {
 
-        // Prevent increment when game is over
+        /**
+         * Prevent increment when game is over
+         */
         if (!endgameFlag) {
             incrementLowerClock()
         }
 
-        // Core commands to pause the clock
+        /**
+         * Core commands to pause the clock
+         */
         stopService(lowerClockServiceIntent)
         binding.lowerClockButton.isEnabled = false
         binding.lowerClockButton.visibility = View.INVISIBLE
 
-        // Pause animation
+        /**
+         * Pause animation
+         */
         binding.lowerClockImageAnimationOne.visibility = View.INVISIBLE
         binding.lowerClockImageAnimationTwo.visibility = View.INVISIBLE
         lowerClockStatusAnimation = false
@@ -88,15 +101,21 @@ class MainActivity : AppCompatActivity() {
     private val updateUpperClockTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
 
-            // Check if game is not over
+            /**
+             * Check if game is not over
+             */
             if (upperClockTime > 0.0) {
 
-                // Allows upper clock animation begin
+                /**
+                 * Allows upper clock animation begin
+                 */
                 if(upperClockTime < 46.0) {
                     upperFlag = true
                 }
 
-                // Update clock time
+                /**
+                 * Update clock time
+                 */
                 upperClockTime = intent.getDoubleExtra(UpperClockService.UPPER_TIME_EXTRA, 180.0)
                 binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
             } else {
@@ -105,27 +124,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // LOWER CLOCK FUNCTIONS
+    /**
+     * LOWER CLOCK FUNCTIONS
+     */
     private fun startLowerPauseUpper() {
 
-        // First pause the running clock to make sure the increment is added if needed
+        /**
+         * First pause the running clock to make sure the increment is added if needed
+         */
         pauseUpperClock()
         startLowerClock()
     }
 
     private fun pauseUpperClock() {
 
-        // Prevent increment when game is over
+        /**
+         * Prevent increment when game is over
+         */
         if (!endgameFlag) {
             incrementUpperClock()
         }
 
-        // Core commands to pause the clock
+        /**
+         * Core commands to pause the clock
+         */
         stopService(upperClockServiceIntent)
         binding.upperClockButton.isEnabled = false
         binding.upperClockButton.visibility = View.INVISIBLE
 
-        // Pause animation
+        /**
+         * Pause animation
+         */
         binding.upperClockImageAnimationOne.visibility = View.INVISIBLE
         binding.upperClockImageAnimationTwo.visibility = View.INVISIBLE
         upperClockStatusAnimation = false
@@ -145,15 +174,21 @@ class MainActivity : AppCompatActivity() {
     private val updateLowerClockTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
 
-            // Check if game is not over
+            /**
+             * Check if game is not over
+             */
             if(lowerClockTime > 0.0) {
 
-                // Allows lower clock animation begin
+                /**
+                 * Allows lower clock animation begin
+                 */
                 if(lowerClockTime < 46.0) {
                     lowerFlag = true
                 }
 
-                // Update clock time
+                /**
+                 * Update clock time
+                 */
                 lowerClockTime = intent.getDoubleExtra(LowerClockService.LOWER_TIME_EXTRA, 180.0)
                 binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
             } else {
@@ -162,7 +197,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // RESET CLOCKS FUNCTION
+    /**
+     * RESET CLOCKS FUNCTION
+     */
     private fun resetClocks() {
         endGameState()
         gameMode()
@@ -175,7 +212,9 @@ class MainActivity : AppCompatActivity() {
         binding.lowerClockButton.isEnabled = true
     }
 
-    // END GAME STATE
+    /**
+     * END GAME STATE
+     */
     private fun endGameState() {
         endgameFlag = true
         upperFlag = false
@@ -184,7 +223,9 @@ class MainActivity : AppCompatActivity() {
         pauseLowerClock()
     }
 
-    // GAME MODE FUNCTIONS
+    /**
+     * GAME MODE FUNCTIONS
+     */
     private fun gameMode() {
         if (gameModeSelector == "bulletGameMode") {
             upperClockTime = 60.0
@@ -228,7 +269,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // RESET DIALOG
+    /**
+     * RESET DIALOG
+     */
     private fun resetDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.apply {
@@ -241,7 +284,9 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    // CONFIGURATION DIALOG
+    /**
+     * CONFIGURATION DIALOG
+     */
     private fun configurationDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.apply {
@@ -267,7 +312,9 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    // LOW TIME WARNING ANIMATION FUNCTIONS
+    /**
+     * LOW TIME WARNING ANIMATION FUNCTIONS
+     */
     private fun startUpperAnimation() {
         upperClockStatusAnimation = true
         binding.upperClockImageAnimationOne.visibility = View.VISIBLE
@@ -331,10 +378,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // INCREMENT FUNCTIONS
+    /**
+     * INCREMENT FUNCTIONS
+     */
     private fun incrementUpperClock() {
 
-        // Check if there is an increment to be done and if it's not the first movement of the game
+        /**
+         * Check if there is an increment to be done and if it's not the first movement of the game
+         */
         if (incrementValue != 0.0 && !binding.lowerClockButton.isEnabled) {
             when(incrementValue) {
                 1.0 -> upperClockTime += 1.0
@@ -342,14 +393,18 @@ class MainActivity : AppCompatActivity() {
                 5.0 -> upperClockTime += 5.0
             }
 
-            // Update the UI
+            /**
+             * Update the UI
+             */
             binding.upperClockText.text = getTimeStringFromDouble(upperClockTime)
         }
     }
 
     private fun incrementLowerClock() {
 
-        // Check if there is an increment to be done and if it's not the first movement of the game
+        /**
+         * Check if there is an increment to be done and if it's not the first movement of the game
+         */
         if (incrementValue != 0.0 && !binding.upperClockButton.isEnabled) {
             when(incrementValue) {
                 1.0 -> lowerClockTime += 1.0
@@ -357,12 +412,16 @@ class MainActivity : AppCompatActivity() {
                 5.0 -> lowerClockTime += 5.0
             }
 
-            // Update the UI
+            /**
+             * Update the UI
+             */
             binding.lowerClockText.text = getTimeStringFromDouble(lowerClockTime)
         }
     }
 
-    // TIME FORMAT MANIPULATION
+    /**
+     * TIME FORMAT MANIPULATION
+     */
     private fun getTimeStringFromDouble(time: Double): String {
         val resultInt = time.roundToInt()
         val minutes = resultInt % 86400 % 3600 / 60
